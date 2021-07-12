@@ -1,0 +1,12 @@
+D:\web_projects\PharmaySrevice\PharmacyService.DataAccess\obj\Debug\netcoreapp3.1\PharmacyService.DataAccess.csprojAssemblyReference.cache
+D:\web_projects\PharmaySrevice\PharmacyService.DataAccess\obj\Debug\netcoreapp3.1\PharmacyService.DataAccess.AssemblyInfoInputs.cache
+D:\web_projects\PharmaySrevice\PharmacyService.DataAccess\obj\Debug\netcoreapp3.1\PharmacyService.DataAccess.AssemblyInfo.cs
+D:\web_projects\PharmaySrevice\PharmacyService.DataAccess\obj\Debug\netcoreapp3.1\PharmacyService.DataAccess.csproj.CoreCompileInputs.cache
+D:\web_projects\PharmaySrevice\PharmacyService.DataAccess\bin\Debug\netcoreapp3.1\PharmacyService.DataAccess.deps.json
+D:\web_projects\PharmaySrevice\PharmacyService.DataAccess\bin\Debug\netcoreapp3.1\PharmacyService.DataAccess.dll
+D:\web_projects\PharmaySrevice\PharmacyService.DataAccess\bin\Debug\netcoreapp3.1\PharmacyService.DataAccess.pdb
+D:\web_projects\PharmaySrevice\PharmacyService.DataAccess\bin\Debug\netcoreapp3.1\PharmacyService.Models.dll
+D:\web_projects\PharmaySrevice\PharmacyService.DataAccess\bin\Debug\netcoreapp3.1\PharmacyService.Models.pdb
+D:\web_projects\PharmaySrevice\PharmacyService.DataAccess\obj\Debug\netcoreapp3.1\PharmacyService.DataAccess.csproj.CopyComplete
+D:\web_projects\PharmaySrevice\PharmacyService.DataAccess\obj\Debug\netcoreapp3.1\PharmacyService.DataAccess.dll
+D:\web_projects\PharmaySrevice\PharmacyService.DataAccess\obj\Debug\netcoreapp3.1\PharmacyService.DataAccess.pdb

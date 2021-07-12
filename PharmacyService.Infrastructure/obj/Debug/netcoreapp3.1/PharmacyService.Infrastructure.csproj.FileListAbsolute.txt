@@ -1,0 +1,8 @@
+D:\web_projects\PharmaySrevice\PharmacyService.Infrastructure\bin\Debug\netcoreapp3.1\PharmacyService.Infrastructure.deps.json
+D:\web_projects\PharmaySrevice\PharmacyService.Infrastructure\bin\Debug\netcoreapp3.1\PharmacyService.Infrastructure.dll
+D:\web_projects\PharmaySrevice\PharmacyService.Infrastructure\bin\Debug\netcoreapp3.1\PharmacyService.Infrastructure.pdb
+D:\web_projects\PharmaySrevice\PharmacyService.Infrastructure\obj\Debug\netcoreapp3.1\PharmacyService.Infrastructure.AssemblyInfoInputs.cache
+D:\web_projects\PharmaySrevice\PharmacyService.Infrastructure\obj\Debug\netcoreapp3.1\PharmacyService.Infrastructure.AssemblyInfo.cs
+D:\web_projects\PharmaySrevice\PharmacyService.Infrastructure\obj\Debug\netcoreapp3.1\PharmacyService.Infrastructure.csproj.CoreCompileInputs.cache
+D:\web_projects\PharmaySrevice\PharmacyService.Infrastructure\obj\Debug\netcoreapp3.1\PharmacyService.Infrastructure.dll
+D:\web_projects\PharmaySrevice\PharmacyService.Infrastructure\obj\Debug\netcoreapp3.1\PharmacyService.Infrastructure.pdb
