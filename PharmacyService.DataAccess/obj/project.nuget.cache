@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "K0aGFL9HkFRv38wS111f5GXnbr0sbwEOOjHY0IgjN4Ig0jnCjXnSxPilKbhgL3pRH3m5FSntV8Znzi1E9IYu1A==",
+  "dgSpecHash": "yuX/khNFVGxjOXqshYCCwXhlQrd8MSxQvgAZ9lbhfrrmAWULxxexZixew96ItOgb1RgIk16+fWB5fdjdtStrMg==",
   "success": true,
-  "projectFilePath": "D:\\web_projects\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj",
+  "projectFilePath": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\a_ash\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",

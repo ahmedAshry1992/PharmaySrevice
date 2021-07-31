@@ -19,7 +19,62 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
             this.context = context;
         }
 
-        public async Task<InvoiceCreateResponse> AddManyItems(int invoicId, int userId, List<InvoiceDetails> sales)
+        //public async Task<List<int>> AddManyItems(int invoicId, int userId, List<InvoiceDetails> sales, List<int> ids)
+        //{
+        //    if (ids.Count()!=0)
+        //    {
+        //        await RemoveInvoiceDetailsGroup(ids);
+        //    }
+        //    foreach (var item in sales)
+        //    {
+        //        item.invoiceId = invoicId;
+        //        item.createdBy = userId;
+        //    }
+        //    await context.InvoicesDetails.AddRangeAsync(sales);
+        //    context.SaveChanges();
+        //    ids.Clear();
+        //    foreach (var item in sales)
+        //    {
+        //        ids.Add(item.id);
+        //    }
+        //    return ids;
+        //}
+
+        public async Task<int> AddManyItems(int invoicId, int userId, List<InvoiceDetails> sales)
+        {
+            var newId = 0;
+            foreach (var item in sales)
+            {
+                if (item.id==0)
+                {
+                    item.invoiceId = invoicId;
+                    item.createdBy = userId;
+                    await context.InvoicesDetails.AddAsync(item);
+                    context.SaveChanges();
+                    newId = item.id;
+                }
+                else
+                {                    
+                    context.InvoicesDetails.Update(item);
+                    context.SaveChanges();
+                }
+                
+            }
+            
+            return newId;
+        }
+
+        public async Task RemoveInvoiceDetailsGroup(List<int> ids)
+        {
+            foreach (var id in ids)
+            {
+                var item = await context.InvoicesDetails.FindAsync(id);
+                context.InvoicesDetails.Remove(item);
+            }
+            context.SaveChanges();
+        }
+
+        public async Task<InvoiceCreateResponse> SaveItems(int invoicId, int userId, List<InvoiceDetails> sales)
         {
             foreach (var item in sales)
             {

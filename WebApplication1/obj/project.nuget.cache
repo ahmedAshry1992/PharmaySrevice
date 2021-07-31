@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VB2uF6W/R1VBGoLhZixBMZWHfmPAoFRnzs0siMO8Ra3NqwOx9cOvDWhPyQTFn1edCs/BmFBKm1d/FQf9YB1Z9A==",
+  "dgSpecHash": "ABvdo/gVg5s96Na/cnOHwF4Owj+n1C9HraN2Il+OuwZNHTYMhmVvLBlzJW2M+tRK8UKU4mv2iiK+OE2UemPLmw==",
   "success": true,
-  "projectFilePath": "D:\\web_projects\\PharmaySrevice\\WebApplication1\\WebApplication1.csproj",
+  "projectFilePath": "D:\\github\\PharmacyService\\PharmaySrevice\\WebApplication1\\WebApplication1.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\a_ash\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\a_ash\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",

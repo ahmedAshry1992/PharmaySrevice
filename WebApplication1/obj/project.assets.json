@@ -6101,11 +6101,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\web_projects\\PharmaySrevice\\WebApplication1\\WebApplication1.csproj",
+      "projectUniqueName": "D:\\github\\PharmacyService\\PharmaySrevice\\WebApplication1\\WebApplication1.csproj",
       "projectName": "WebApplication1",
-      "projectPath": "D:\\web_projects\\PharmaySrevice\\WebApplication1\\WebApplication1.csproj",
+      "projectPath": "D:\\github\\PharmacyService\\PharmaySrevice\\WebApplication1\\WebApplication1.csproj",
       "packagesPath": "C:\\Users\\a_ash\\.nuget\\packages\\",
-      "outputPath": "D:\\web_projects\\PharmaySrevice\\WebApplication1\\obj\\",
+      "outputPath": "D:\\github\\PharmacyService\\PharmaySrevice\\WebApplication1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -6125,11 +6125,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\web_projects\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj": {
-              "projectPath": "D:\\web_projects\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj"
+            "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj": {
+              "projectPath": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj"
             },
-            "D:\\web_projects\\PharmaySrevice\\PharmacyService.Infrastructure\\PharmacyService.Infrastructure.csproj": {
-              "projectPath": "D:\\web_projects\\PharmaySrevice\\PharmacyService.Infrastructure\\PharmacyService.Infrastructure.csproj"
+            "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.Infrastructure\\PharmacyService.Infrastructure.csproj": {
+              "projectPath": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.Infrastructure\\PharmacyService.Infrastructure.csproj"
             }
           }
         }
@@ -6199,7 +6199,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

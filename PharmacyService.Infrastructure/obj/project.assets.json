@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\web_projects\\PharmaySrevice\\PharmacyService.Infrastructure\\PharmacyService.Infrastructure.csproj",
+      "projectUniqueName": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.Infrastructure\\PharmacyService.Infrastructure.csproj",
       "projectName": "PharmacyService.Infrastructure",
-      "projectPath": "D:\\web_projects\\PharmaySrevice\\PharmacyService.Infrastructure\\PharmacyService.Infrastructure.csproj",
+      "projectPath": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.Infrastructure\\PharmacyService.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\a_ash\\.nuget\\packages\\",
-      "outputPath": "D:\\web_projects\\PharmaySrevice\\PharmacyService.Infrastructure\\obj\\",
+      "outputPath": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -64,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

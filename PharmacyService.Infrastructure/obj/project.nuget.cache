@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RYvRy/Tp1QtiEqdrDZEw6G80H+uPvDoohddRK2thjSbesjtv0wQP359MNhNS8tohVhXDk8jyNCk0eQJauDMdHg==",
+  "dgSpecHash": "A7jEcKlK1HYM5GALKFCSsF82vJVCRFMIN9VNwtaevD9ydc29YqZO3Op3nnM+ZF//YJ+BeB/vD3D22wq74OyRSQ==",
   "success": true,
-  "projectFilePath": "D:\\web_projects\\PharmaySrevice\\PharmacyService.Infrastructure\\PharmacyService.Infrastructure.csproj",
+  "projectFilePath": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.Infrastructure\\PharmacyService.Infrastructure.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\web_projects\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj": {}
+    "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj": {}
   },
   "projects": {
-    "D:\\web_projects\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj": {
+    "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\web_projects\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj",
+        "projectUniqueName": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj",
         "projectName": "PharmacyService.DataAccess",
-        "projectPath": "D:\\web_projects\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj",
+        "projectPath": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.DataAccess\\PharmacyService.DataAccess.csproj",
         "packagesPath": "C:\\Users\\a_ash\\.nuget\\packages\\",
-        "outputPath": "D:\\web_projects\\PharmaySrevice\\PharmacyService.DataAccess\\obj\\",
+        "outputPath": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -31,8 +31,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "D:\\web_projects\\PharmaySrevice\\PharmacyService.Models\\PharmacyService.Models.csproj": {
-                "projectPath": "D:\\web_projects\\PharmaySrevice\\PharmacyService.Models\\PharmacyService.Models.csproj"
+              "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.Models\\PharmacyService.Models.csproj": {
+                "projectPath": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.Models\\PharmacyService.Models.csproj"
               }
             }
           }
@@ -79,18 +79,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\web_projects\\PharmaySrevice\\PharmacyService.Models\\PharmacyService.Models.csproj": {
+    "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.Models\\PharmacyService.Models.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\web_projects\\PharmaySrevice\\PharmacyService.Models\\PharmacyService.Models.csproj",
+        "projectUniqueName": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.Models\\PharmacyService.Models.csproj",
         "projectName": "PharmacyService.Models",
-        "projectPath": "D:\\web_projects\\PharmaySrevice\\PharmacyService.Models\\PharmacyService.Models.csproj",
+        "projectPath": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.Models\\PharmacyService.Models.csproj",
         "packagesPath": "C:\\Users\\a_ash\\.nuget\\packages\\",
-        "outputPath": "D:\\web_projects\\PharmaySrevice\\PharmacyService.Models\\obj\\",
+        "outputPath": "D:\\github\\PharmacyService\\PharmaySrevice\\PharmacyService.Models\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -136,7 +136,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.104\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

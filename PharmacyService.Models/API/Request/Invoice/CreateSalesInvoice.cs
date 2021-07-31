@@ -6,6 +6,7 @@ namespace PharmacyService.Models.API.Request.Invoice
 {
     public class CreateSalesInvoice
     {
+        public int id { get; set; }
         public int userId { get; set; }
         public int? customerId { get; set; }
         public int statusId { get; set; }
@@ -14,6 +15,7 @@ namespace PharmacyService.Models.API.Request.Invoice
     }
     public class SalesInvoiceModel
     {
+        public int id { get; set; }
         public int invoiceId { get; set; }
         public int productToSellId { get; set; }
         public float discount { get; set; }

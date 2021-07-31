@@ -9,7 +9,9 @@ namespace PharmacyService.DataAccess.DomainRepository.IRepository.Invoices
 {
     public interface IInvoiceDetailsRepository : IRepository<InvoiceDetails>
     {
-        Task<InvoiceCreateResponse> AddManyItems(int invoicId, int userId, List<InvoiceDetails> sales);
+        //Task<List<int>> AddManyItems(int invoicId, int userId, List<InvoiceDetails> sales, List<int> ids);
+        Task<int> AddManyItems(int invoicId, int userId, List<InvoiceDetails> sales);
+        Task<InvoiceCreateResponse> SaveItems(int invoicId, int userId, List<InvoiceDetails> sales);
         Task<List<InvoiceDetails>> GetInvoiceDetails(int id);
     }
 }
