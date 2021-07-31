@@ -15,3 +15,12 @@ D:\github\PharmacyService\PharmaySrevice\PharmacyService.Models\obj\Debug\netcor
 D:\github\PharmacyService\PharmaySrevice\PharmacyService.Models\obj\Debug\netcoreapp3.1\PharmacyService.Models.dll
 D:\github\PharmacyService\PharmaySrevice\PharmacyService.Models\obj\Debug\netcoreapp3.1\PharmacyService.Models.pdb
 D:\github\PharmacyService\PharmaySrevice\PharmacyService.Models\obj\Debug\netcoreapp3.1\PharmacyService.Models.csproj.AssemblyReference.cache
+D:\work\PharmacyPro\PharmacyService\PharmacyService.Models\bin\Debug\netcoreapp3.1\PharmacyService.Models.deps.json
+D:\work\PharmacyPro\PharmacyService\PharmacyService.Models\bin\Debug\netcoreapp3.1\PharmacyService.Models.dll
+D:\work\PharmacyPro\PharmacyService\PharmacyService.Models\bin\Debug\netcoreapp3.1\PharmacyService.Models.pdb
+D:\work\PharmacyPro\PharmacyService\PharmacyService.Models\obj\Debug\netcoreapp3.1\PharmacyService.Models.csprojAssemblyReference.cache
+D:\work\PharmacyPro\PharmacyService\PharmacyService.Models\obj\Debug\netcoreapp3.1\PharmacyService.Models.AssemblyInfoInputs.cache
+D:\work\PharmacyPro\PharmacyService\PharmacyService.Models\obj\Debug\netcoreapp3.1\PharmacyService.Models.AssemblyInfo.cs
+D:\work\PharmacyPro\PharmacyService\PharmacyService.Models\obj\Debug\netcoreapp3.1\PharmacyService.Models.csproj.CoreCompileInputs.cache
+D:\work\PharmacyPro\PharmacyService\PharmacyService.Models\obj\Debug\netcoreapp3.1\PharmacyService.Models.dll
+D:\work\PharmacyPro\PharmacyService\PharmacyService.Models\obj\Debug\netcoreapp3.1\PharmacyService.Models.pdb
