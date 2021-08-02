@@ -49,6 +49,17 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
             return invoice.id;
         }
 
+        public async Task update(Invoice invoice)
+        {
+            var result= await context.Invoices.FindAsync(invoice.id);
+            result.modifiedBy = invoice.userId;
+            result.typeId = invoice.typeId;
+            result.statusId = invoice.statusId;
+            result.customerId = invoice.customerId;
+            result.modifiedAt = DateTime.Now;
+            context.SaveChanges();
+            
+        }
         public async Task<List<Invoice>> GetSalesInvoiceByFilter(SalesInvoiceFilterRequest request)
         {
             var response = context.Invoices.Where(x => !x.isDeleted);

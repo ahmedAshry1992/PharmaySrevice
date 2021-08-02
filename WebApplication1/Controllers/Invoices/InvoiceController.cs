@@ -123,18 +123,17 @@ namespace WebApplication1.Controllers.Invoices
 
         [HttpPost]
         [Route("invoice/sales/add")]
-        public async Task<ResponseBuilder> CreateSalesInvoice(CreateSalesInvoice request)
+        public async Task<ResponseBuilder> CreateSalesInvoice(EditSalesInvoiceRequest request)
         {
             try
             {
-                
-                
-                    var validations = await _invoicesDataProvider.Invoice.ValidateInvoiceRequest(request);
-                    validations.AddRange(await _servicesDataProvider.User.ValidUserId(request.userId));
+                    var validations = await _invoicesDataProvider.Invoice.ValidateInvoiceRequest(request.salesInvoiceRequest);
+                    validations.AddRange(await _servicesDataProvider.User.ValidUserId(request.salesInvoiceRequest.userId));
                     if (validations.Count == 0)
                     {
-                        var id = await _invoicesDataProvider.Invoice.AddGetId(_mapper.Map<Invoice>(request));
-                        var response = await _invoicesDataProvider.InvoiceDetails.SaveItems(id, request.userId, _mapper.Map<List<InvoiceDetails>>(request.salesProducts));
+                    await _invoicesDataProvider.Invoice.update(_mapper.Map<Invoice>(request.salesInvoiceRequest));
+                        var id = request.salesInvoiceRequest.id;
+                        var response = await _invoicesDataProvider.InvoiceDetails.SaveItems(id, request.salesInvoiceRequest.userId, _mapper.Map<List<InvoiceDetails>>(request.salesInvoiceRequest.salesProducts));
 
                         return ResponseBuilder.Create(HttpStatusCode.OK, response);
                     }
@@ -158,16 +157,23 @@ namespace WebApplication1.Controllers.Invoices
             {
                 if (request.salesInvoiceRequest.id != 0)
                 {
+                    await _invoicesDataProvider.Invoice.update(_mapper.Map<Invoice>(request.salesInvoiceRequest));
                     var result = await _invoicesDataProvider.InvoiceDetails.AddManyItems(request.salesInvoiceRequest.id, request.salesInvoiceRequest.userId, _mapper.Map<List<InvoiceDetails>>(request.salesInvoiceRequest.salesProducts));
                     var response = new InvoiceEditResponse() { id = result, invoiceId = request.salesInvoiceRequest.id };
                     return ResponseBuilder.Create(HttpStatusCode.OK, response);
                 }
                 else
                 {
-                    var id = await _invoicesDataProvider.Invoice.AddGetId(_mapper.Map<Invoice>(request.salesInvoiceRequest));
-                    var result = await _invoicesDataProvider.InvoiceDetails.AddManyItems(id, request.salesInvoiceRequest.userId, _mapper.Map<List<InvoiceDetails>>(request.salesInvoiceRequest.salesProducts));
-                    var response = new InvoiceEditResponse() { id = result, invoiceId = id };
-                    return ResponseBuilder.Create(HttpStatusCode.OK, response);
+                    var validations = await _servicesDataProvider.User.ValidUserId(request.salesInvoiceRequest.userId);
+                    
+                    if (validations.Count == 0) {
+                        var id = await _invoicesDataProvider.Invoice.AddGetId(_mapper.Map<Invoice>(request.salesInvoiceRequest));
+                        var result = await _invoicesDataProvider.InvoiceDetails.AddManyItems(id, request.salesInvoiceRequest.userId, _mapper.Map<List<InvoiceDetails>>(request.salesInvoiceRequest.salesProducts));
+                        var response = new InvoiceEditResponse() { id = result, invoiceId = id };
+                        return ResponseBuilder.Create(HttpStatusCode.OK, response);
+                    }
+                    return ResponseBuilder.Create(HttpStatusCode.InternalServerError, new { status = false }, validations);
+
                 }
             }
             catch (Exception ex)
@@ -176,6 +182,25 @@ namespace WebApplication1.Controllers.Invoices
                 return ResponseBuilder.Create(HttpStatusCode.InternalServerError, new { status = false }, new string[] { ex.Message });
             }
         }
+
+        [HttpPost]
+        [Route("invoice/details/delete")]
+        public async Task<ResponseBuilder> DeletInvoiceDetItem([FromBody] int request)
+        {
+            try
+            {
+                await _invoicesDataProvider.InvoiceDetails.RemoveInvoiceDetailsItem(request);
+                return ResponseBuilder.Create(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+
+                return ResponseBuilder.Create(HttpStatusCode.InternalServerError, new { status = false }, new string[] { ex.Message });
+            }
+        }
+        
+
+        
 
         [HttpGet]
         [Route("invoice/sales/getall")]

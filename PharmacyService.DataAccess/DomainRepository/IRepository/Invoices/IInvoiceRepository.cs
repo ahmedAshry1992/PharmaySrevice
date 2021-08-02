@@ -12,5 +12,6 @@ namespace PharmacyService.DataAccess.DomainRepository.IRepository.Invoices
         Task<int> AddGetId(Invoice invoice);
         Task<List<Invoice>> GetSalesInvoiceByFilter(SalesInvoiceFilterRequest request);
         Task<List<string>> ValidateInvoiceRequest(CreateSalesInvoice request);
+        Task update(Invoice invoice);
     }
 }

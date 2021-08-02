@@ -13,5 +13,6 @@ namespace PharmacyService.DataAccess.DomainRepository.IRepository.Invoices
         Task<int> AddManyItems(int invoicId, int userId, List<InvoiceDetails> sales);
         Task<InvoiceCreateResponse> SaveItems(int invoicId, int userId, List<InvoiceDetails> sales);
         Task<List<InvoiceDetails>> GetInvoiceDetails(int id);
+        Task RemoveInvoiceDetailsItem(int id);
     }
 }

@@ -54,7 +54,8 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
                     newId = item.id;
                 }
                 else
-                {                    
+                {
+                    item.createdBy = userId;
                     context.InvoicesDetails.Update(item);
                     context.SaveChanges();
                 }
@@ -64,24 +65,77 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
             return newId;
         }
 
-        public async Task RemoveInvoiceDetailsGroup(List<int> ids)
+        public async Task RemoveInvoiceDetailsItem(int id)
         {
-            foreach (var id in ids)
-            {
-                var item = await context.InvoicesDetails.FindAsync(id);
-                context.InvoicesDetails.Remove(item);
-            }
+           
+            var item = await context.InvoicesDetails.FindAsync(id);
+            item.isDeleted = true;
+            
             context.SaveChanges();
         }
 
+        //public async Task<InvoiceCreateResponse> SaveItems(int invoicId, int userId, List<InvoiceDetails> sales)
+        //{
+        //    foreach (var item in sales)
+        //    {
+        //        item.invoiceId= invoicId;
+        //        item.createdBy = userId;
+
+        //    }
+        //    ProductToSell product = new ProductToSell();
+        //    InvoiceCreateResponse invoiceCreateResponse = new InvoiceCreateResponse();
+        //    List<InvoiceSales> invoiceSales = new List<InvoiceSales>();
+        //    float total = 0;
+        //    float productPrice = 0;
+        //    foreach (var item in sales)
+        //    {
+        //        product = context.ProductsToSell.Find(item.productToSellId);
+        //        if (product.exist && product.items >= item.items)
+        //        {
+        //            var pItems = context.Products.Find(product.productId);
+        //            if (item.discount > 0)
+        //            {
+        //                productPrice = pItems.price - (pItems.price * item.discount);
+        //            }
+        //            else productPrice = pItems.price;
+        //            invoiceSales.Add(new InvoiceSales
+        //            {
+        //                productName = pItems.englishName,
+        //                smallUnits = item.items == pItems.largeUnits ? 0 : item.items,
+        //                largeUnits = item.items == pItems.largeUnits ? 1 : 0,
+        //                price = productPrice * ((float)item.items / pItems.largeUnits),
+        //                discount=item.discount
+        //            });                    
+        //            total = total + ((float)productPrice * ((float)item.items / pItems.largeUnits));
+        //            product.items -= item.items;
+        //            product.modifiedBy = userId;
+        //            product.modifiedAt = DateTime.Now;
+        //            if (product.items == 0)
+        //            {
+        //                product.exist = false;
+        //            }
+
+        //        }
+
+        //    }
+        //    await context.InvoicesDetails.AddRangeAsync(sales);
+        //    context.SaveChanges();
+        //    invoiceCreateResponse.invoiceSales = invoiceSales;
+        //    invoiceCreateResponse.total = total;
+        //    invoiceCreateResponse.id = invoicId;
+        //    invoiceCreateResponse.createdDate = DateTime.Now;
+        //    invoiceCreateResponse.userId = userId;
+        //    return invoiceCreateResponse;
+        //}
+
         public async Task<InvoiceCreateResponse> SaveItems(int invoicId, int userId, List<InvoiceDetails> sales)
         {
-            foreach (var item in sales)
-            {
-                item.invoiceId= invoicId;
-                item.createdBy = userId;
+            //foreach (var item in sales)
+            //{
+            //    item.invoiceId = invoicId;
+            //    item.createdBy = userId;
 
-            }
+            //}
             ProductToSell product = new ProductToSell();
             InvoiceCreateResponse invoiceCreateResponse = new InvoiceCreateResponse();
             List<InvoiceSales> invoiceSales = new List<InvoiceSales>();
@@ -89,7 +143,7 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
             float productPrice = 0;
             foreach (var item in sales)
             {
-                product = context.ProductsToSell.Find(item.productToSellId);
+                product = await context.ProductsToSell.FindAsync(item.productToSellId);
                 if (product.exist && product.items >= item.items)
                 {
                     var pItems = context.Products.Find(product.productId);
@@ -104,8 +158,8 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
                         smallUnits = item.items == pItems.largeUnits ? 0 : item.items,
                         largeUnits = item.items == pItems.largeUnits ? 1 : 0,
                         price = productPrice * ((float)item.items / pItems.largeUnits),
-                        discount=item.discount
-                    });                    
+                        discount = item.discount
+                    });
                     total = total + ((float)productPrice * ((float)item.items / pItems.largeUnits));
                     product.items -= item.items;
                     product.modifiedBy = userId;
@@ -118,7 +172,7 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
                 }
 
             }
-            await context.InvoicesDetails.AddRangeAsync(sales);
+            
             context.SaveChanges();
             invoiceCreateResponse.invoiceSales = invoiceSales;
             invoiceCreateResponse.total = total;
@@ -127,6 +181,8 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
             invoiceCreateResponse.userId = userId;
             return invoiceCreateResponse;
         }
+
+
 
         public async Task<List<InvoiceDetails>> GetInvoiceDetails(int id)
         {

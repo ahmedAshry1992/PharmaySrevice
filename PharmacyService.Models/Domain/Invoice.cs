@@ -13,5 +13,7 @@ namespace PharmacyService.Models.Domain
         public int typeId { get; set; }
         public List<InvoiceDetails> MyProperty { get; set; }
 
+       
+
     }
 }
