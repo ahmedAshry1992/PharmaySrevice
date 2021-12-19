@@ -11,7 +11,7 @@ namespace PharmacyService.Models.Domain
         public int purchaceInvoiceId { get; set; }
         [ForeignKey(nameof(purchaceInvoiceId))]
         public PurchaceInvoice purchaceInvoice { get; set; }
-        public int productId { get; set; }
+        public int productInPranchetId { get; set; }
         public int quantity { get; set; }
         public int bonus { get; set; }
         public decimal purchacePrice { get; set; }

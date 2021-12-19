@@ -19,7 +19,7 @@ namespace PharmacyService.Models.API.Request.Services
         public int smallUnitTypeID { set; get; }
         public byte largeUnits { set; get; }
         public byte smallUnits { set; get; }
-        public int companyId { set; get; }
+        public int productsCompanyId { set; get; }
         public float price { set; get; }
         public bool isDeleted { get; set; }
         public ProductRequest()

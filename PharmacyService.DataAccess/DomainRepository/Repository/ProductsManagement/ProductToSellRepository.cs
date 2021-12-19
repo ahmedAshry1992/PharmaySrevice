@@ -27,14 +27,14 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.ProductsManagem
             {
                 for (int i = 0; i < item.quantity; i++)
                 {
-                    productsToSell.Add(new ProductToSell { productId = item.productId, purchaceInvoiceDetailsId = item.id, exist = true, returned = false, items = context.Products.Find(item.productId).largeUnits, returnedItems = 0, createdBy = userId });
+                    productsToSell.Add(new ProductToSell { productInPranchetId = item.productInPranchetId, purchaceInvoiceDetailsId = item.id, exist = true, returned = false, items = context.Products.Find( context.productsInPranche.Find(item.productInPranchetId).productId).largeUnits, returnedItems = 0, createdBy = userId });
                 }
                 
                 if (item.bonus>0)
                 {
                     for (int i = 0; i < item.bonus; i++)
                     {
-                        productsToSell.Add(new ProductToSell { productId = item.productId, purchaceInvoiceDetailsId =item.id, exist = true, returned = false, items = context.Products.Find(item.productId).largeUnits, returnedItems = 0, createdBy = userId, isBonus=true });
+                        productsToSell.Add(new ProductToSell { productInPranchetId = item.productInPranchetId, purchaceInvoiceDetailsId =item.id, exist = true, returned = false, items = context.Products.Find(context.productsInPranche.Find(item.productInPranchetId).productId).largeUnits, returnedItems = 0, createdBy = userId, isBonus=true });
                     }
                 }
             }
@@ -45,7 +45,7 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.ProductsManagem
 
         public async Task<List<InventoryResponse>> Inventory(InventoryRequest request)
         {
-            var result = await context.ProductsToSell.Where(x => request.productsToInventory.Contains(x.productId)).ToListAsync();
+            var result = await context.ProductsToSell.Where(x => request.productsToInventory.Contains((int)x.productInPranchetId)).ToListAsync();
             var response = new List<InventoryResponse>();
             var invItem = new InventoryResponse();
             foreach (var item in result)
@@ -53,14 +53,14 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.ProductsManagem
                 var p = request.itemsDetails.Find(x => x.productToSellId == item.id);
                 if (!item.exist && p!=null)
                 {
-                    response.Add(new InventoryResponse { productId = item.productId , productToSellId = item.id, noItemsOnShelf = 0, noItemsOnSystem = item.items, missedItems = 0 - p.items });                    
+                    response.Add(new InventoryResponse { productId = (int)item.productInPranchetId, productToSellId = item.id, noItemsOnShelf = 0, noItemsOnSystem = item.items, missedItems = 0 - p.items });                    
                     
                 }
                 else
                 {
                     if (p != null && item.exist)
                     {
-                        response.Add(new InventoryResponse { productId=item.productId ,productToSellId = item.id, noItemsOnShelf = p.items, noItemsOnSystem = item.items, missedItems = item.items - p.items });
+                        response.Add(new InventoryResponse { productId= (int)item.productInPranchetId, productToSellId = item.id, noItemsOnShelf = p.items, noItemsOnSystem = item.items, missedItems = item.items - p.items });
                         //if (p.items == item.items)
                         //{
                         //    response.Add(new InventoryResponse { productToSellId = item.id, noItemsOnShelf = p.items, noItemsOnSystem = item.items, missedItems = item.items - p.items });
@@ -72,7 +72,7 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.ProductsManagem
                     }
                     else if(item.exist)
                     {
-                        response.Add(new InventoryResponse { productId = item.productId, productToSellId = item.id, noItemsOnShelf = 0, noItemsOnSystem = item.items, missedItems = item.items - 0 });
+                        response.Add(new InventoryResponse { productId = (int)item.productInPranchetId, productToSellId = item.id, noItemsOnShelf = 0, noItemsOnSystem = item.items, missedItems = item.items - 0 });
                     }
 
                 }
@@ -88,7 +88,7 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.ProductsManagem
         public async Task<List<ProductFilterResponse>> GetProductsMatchId(int request)
         {
             var products = context.Products.Where(x => !(x.isDeleted) && x.alive);
-            var productToSell = context.ProductsToSell.Include(x => x.purchaceInvoiceDetails).Include(x => x.product).Where(x => x.exist);
+            var productToSell = context.ProductsToSell.Include(x => x.purchaceInvoiceDetails).Include(x => x.productInPranche).Include(x => x.productInPranche.product).Where(x => x.exist);
           
             var prods = new List<ProductToSell>();
            
@@ -97,7 +97,7 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.ProductsManagem
             var result = new List<ProductFilterResponse>();
             foreach (var item in prods)
             {
-                result.Add(new ProductFilterResponse { code = item.id, items = item.items, name = item.product.englishName, defualtItems=item.product.largeUnits, price = item.product.price, expiry = item.purchaceInvoiceDetails.expireDate });
+                result.Add(new ProductFilterResponse { code = item.id, items = item.items, name = item.productInPranche.product.englishName, defualtItems=item.productInPranche.product.largeUnits, price = item.productInPranche.newPrice, expiry = item.purchaceInvoiceDetails.expireDate });
             }
             return result;
         }
@@ -105,13 +105,13 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.ProductsManagem
         public async Task<List<ProductFilterResponse>> GetProductsMatchName(string request)
         {
             var products = context.Products.Where(x => !(x.isDeleted) && x.alive);
-            var productToSell = context.ProductsToSell.Include(x => x.purchaceInvoiceDetails).Include(x => x.product).Where(x => x.exist);
+            var productToSell = context.ProductsToSell.Include(x => x.purchaceInvoiceDetails).Include(x => x.productInPranche.product).Where(x => x.exist);
             var prods = new List<ProductToSell>();
-            prods = await productToSell.Where(x => x.product.englishName.Contains(request)).ToListAsync();
+            prods = await productToSell.Where(x => x.productInPranche.product.englishName.Contains(request)).ToListAsync();
             var result = new List<ProductFilterResponse>();
             foreach (var item in prods)
             {
-                result.Add(new ProductFilterResponse { code = item.id, items = item.items, name = item.product.englishName, defualtItems = item.product.largeUnits, price = item.product.price, expiry = item.purchaceInvoiceDetails.expireDate });
+                result.Add(new ProductFilterResponse { code = item.id, items = item.items, name = item.productInPranche.product.englishName, defualtItems = item.productInPranche.product.largeUnits, price = item.productInPranche.newPrice, expiry = item.purchaceInvoiceDetails.expireDate });
             }
             return result;
         }

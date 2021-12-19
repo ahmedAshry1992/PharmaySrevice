@@ -96,6 +96,9 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Property<string>("address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("companyId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
 
@@ -118,7 +121,12 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Property<int?>("points")
                         .HasColumnType("int");
 
+                    b.Property<int>("prancheId")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
+
+                    b.HasIndex("prancheId");
 
                     b.ToTable("Customers");
                 });
@@ -160,6 +168,9 @@ namespace PharmacyService.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("companyId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
 
@@ -178,16 +189,23 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Property<int>("modifiedBy")
                         .HasColumnType("int");
 
+                    b.Property<int?>("prancheId")
+                        .HasColumnType("int");
+
                     b.Property<int>("statusId")
                         .HasColumnType("int");
 
                     b.Property<int>("typeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("userId")
+                    b.Property<int?>("userId")
                         .HasColumnType("int");
 
                     b.HasKey("id");
+
+                    b.HasIndex("prancheId");
+
+                    b.HasIndex("userId");
 
                     b.ToTable("Invoices");
                 });
@@ -231,66 +249,6 @@ namespace PharmacyService.DataAccess.Migrations
                     b.HasIndex("invoiceId");
 
                     b.ToTable("InvoicesDetails");
-                });
-
-            modelBuilder.Entity("PharmacyService.Models.Domain.InvoiceStatus", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("createdAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("createdBy")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("modifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("modifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("status")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("invoiceStatuses");
-                });
-
-            modelBuilder.Entity("PharmacyService.Models.Domain.InvoiceType", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("createdAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("createdBy")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("isDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime>("modifiedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("modifiedBy")
-                        .HasColumnType("int");
-
-                    b.Property<string>("type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("invoiceTypes");
                 });
 
             modelBuilder.Entity("PharmacyService.Models.Domain.LargeUnitType", b =>
@@ -374,9 +332,6 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Property<int>("classificationId")
                         .HasColumnType("int");
 
-                    b.Property<int>("companyId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
 
@@ -407,8 +362,11 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Property<int>("modifiedBy")
                         .HasColumnType("int");
 
-                    b.Property<float>("price")
-                        .HasColumnType("real");
+                    b.Property<decimal>("price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("productsCompanyId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("regitered")
                         .HasColumnType("bit");
@@ -424,7 +382,52 @@ namespace PharmacyService.DataAccess.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("productsCompanyId");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("PharmacyService.Models.Domain.ProductInPranche", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("companyId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("createdAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("createdBy")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("modifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("modifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("newPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("prancheId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("productId")
+                        .HasColumnType("int");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("prancheId");
+
+                    b.HasIndex("productId");
+
+                    b.ToTable("productsInPranche");
                 });
 
             modelBuilder.Entity("PharmacyService.Models.Domain.ProductToSell", b =>
@@ -433,6 +436,12 @@ namespace PharmacyService.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Productid")
+                        .HasColumnType("int");
+
+                    b.Property<int>("companyId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
@@ -458,10 +467,13 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Property<int>("modifiedBy")
                         .HasColumnType("int");
 
-                    b.Property<int>("productId")
+                    b.Property<int?>("prancheId")
                         .HasColumnType("int");
 
-                    b.Property<int>("purchaceInvoiceDetailsId")
+                    b.Property<int?>("productInPranchetId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("purchaceInvoiceDetailsId")
                         .HasColumnType("int");
 
                     b.Property<bool>("returned")
@@ -472,7 +484,11 @@ namespace PharmacyService.DataAccess.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("productId");
+                    b.HasIndex("Productid");
+
+                    b.HasIndex("prancheId");
+
+                    b.HasIndex("productInPranchetId");
 
                     b.HasIndex("purchaceInvoiceDetailsId");
 
@@ -519,6 +535,9 @@ namespace PharmacyService.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("companyId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
 
@@ -534,10 +553,20 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Property<int>("modifiedBy")
                         .HasColumnType("int");
 
+                    b.Property<int>("prancheId")
+                        .HasColumnType("int");
+
                     b.Property<int>("supplierId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("userId")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
+
+                    b.HasIndex("prancheId");
+
+                    b.HasIndex("userId");
 
                     b.ToTable("PurchaceInvoices");
                 });
@@ -573,7 +602,7 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Property<int>("modifiedBy")
                         .HasColumnType("int");
 
-                    b.Property<int>("productId")
+                    b.Property<int>("productInPranchetId")
                         .HasColumnType("int");
 
                     b.Property<int>("purchaceInvoiceId")
@@ -599,6 +628,9 @@ namespace PharmacyService.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("companyId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
 
@@ -617,7 +649,17 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Property<int>("modifiedBy")
                         .HasColumnType("int");
 
+                    b.Property<int>("prancheId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("userId")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
+
+                    b.HasIndex("prancheId");
+
+                    b.HasIndex("userId");
 
                     b.ToTable("ReturnedInvoices");
                 });
@@ -667,6 +709,9 @@ namespace PharmacyService.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("companyId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
 
@@ -688,19 +733,26 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Property<int>("modifiedBy")
                         .HasColumnType("int");
 
+                    b.Property<int>("prancheId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("receivedMoney")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("start")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("userId")
+                    b.Property<int?>("userId")
                         .HasColumnType("int");
 
                     b.Property<decimal>("value")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("id");
+
+                    b.HasIndex("prancheId");
+
+                    b.HasIndex("userId");
 
                     b.ToTable("Shifts");
                 });
@@ -742,6 +794,9 @@ namespace PharmacyService.DataAccess.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("companyId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
 
@@ -767,6 +822,8 @@ namespace PharmacyService.DataAccess.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("companyId");
+
                     b.ToTable("Suppliers");
                 });
 
@@ -776,6 +833,9 @@ namespace PharmacyService.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("companyId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("createdAt")
                         .HasColumnType("datetime2");
@@ -817,9 +877,43 @@ namespace PharmacyService.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("prancheId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("role")
+                        .HasColumnType("int");
+
                     b.HasKey("id");
 
+                    b.HasIndex("companyId");
+
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("PharmacyService.Models.Domain.Customer", b =>
+                {
+                    b.HasOne("PharmacyService.Models.Domain.Pranche", "pranche")
+                        .WithMany("customers")
+                        .HasForeignKey("prancheId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("pranche");
+                });
+
+            modelBuilder.Entity("PharmacyService.Models.Domain.Invoice", b =>
+                {
+                    b.HasOne("PharmacyService.Models.Domain.Pranche", "pranche")
+                        .WithMany("invoices")
+                        .HasForeignKey("prancheId");
+
+                    b.HasOne("PharmacyService.Models.Domain.User", "user")
+                        .WithMany("invoices")
+                        .HasForeignKey("userId");
+
+                    b.Navigation("pranche");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("PharmacyService.Models.Domain.InvoiceDetails", b =>
@@ -844,34 +938,102 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Navigation("company");
                 });
 
-            modelBuilder.Entity("PharmacyService.Models.Domain.ProductToSell", b =>
+            modelBuilder.Entity("PharmacyService.Models.Domain.Product", b =>
                 {
+                    b.HasOne("PharmacyService.Models.Domain.ProductsCompany", "productsCompany")
+                        .WithMany("products")
+                        .HasForeignKey("productsCompanyId");
+
+                    b.Navigation("productsCompany");
+                });
+
+            modelBuilder.Entity("PharmacyService.Models.Domain.ProductInPranche", b =>
+                {
+                    b.HasOne("PharmacyService.Models.Domain.Pranche", "pranche")
+                        .WithMany("productsInPranche")
+                        .HasForeignKey("prancheId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("PharmacyService.Models.Domain.Product", "product")
-                        .WithMany("productsToSell")
+                        .WithMany("productsInPranche")
                         .HasForeignKey("productId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("pranche");
+
+                    b.Navigation("product");
+                });
+
+            modelBuilder.Entity("PharmacyService.Models.Domain.ProductToSell", b =>
+                {
+                    b.HasOne("PharmacyService.Models.Domain.Product", null)
+                        .WithMany("productsToSell")
+                        .HasForeignKey("Productid");
+
+                    b.HasOne("PharmacyService.Models.Domain.Pranche", "pranche")
+                        .WithMany("productToSells")
+                        .HasForeignKey("prancheId");
+
+                    b.HasOne("PharmacyService.Models.Domain.ProductInPranche", "productInPranche")
+                        .WithMany()
+                        .HasForeignKey("productInPranchetId");
+
                     b.HasOne("PharmacyService.Models.Domain.PurchaceInvoiceDetails", "purchaceInvoiceDetails")
                         .WithMany("MyProperty")
-                        .HasForeignKey("purchaceInvoiceDetailsId")
+                        .HasForeignKey("purchaceInvoiceDetailsId");
+
+                    b.Navigation("pranche");
+
+                    b.Navigation("productInPranche");
+
+                    b.Navigation("purchaceInvoiceDetails");
+                });
+
+            modelBuilder.Entity("PharmacyService.Models.Domain.PurchaceInvoice", b =>
+                {
+                    b.HasOne("PharmacyService.Models.Domain.Pranche", "pranche")
+                        .WithMany("purchaceInvoices")
+                        .HasForeignKey("prancheId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("product");
+                    b.HasOne("PharmacyService.Models.Domain.User", "user")
+                        .WithMany("purchaceInvoices")
+                        .HasForeignKey("userId");
 
-                    b.Navigation("purchaceInvoiceDetails");
+                    b.Navigation("pranche");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("PharmacyService.Models.Domain.PurchaceInvoiceDetails", b =>
                 {
                     b.HasOne("PharmacyService.Models.Domain.PurchaceInvoice", "purchaceInvoice")
-                        .WithMany("MyProperty")
+                        .WithMany("purchaceInvoiceDetails")
                         .HasForeignKey("purchaceInvoiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("purchaceInvoice");
+                });
+
+            modelBuilder.Entity("PharmacyService.Models.Domain.ReturnedInvoice", b =>
+                {
+                    b.HasOne("PharmacyService.Models.Domain.Pranche", "pranche")
+                        .WithMany("returnedInvoices")
+                        .HasForeignKey("prancheId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PharmacyService.Models.Domain.User", "user")
+                        .WithMany("returnedInvoices")
+                        .HasForeignKey("userId");
+
+                    b.Navigation("pranche");
+
+                    b.Navigation("user");
                 });
 
             modelBuilder.Entity("PharmacyService.Models.Domain.ReturnedInvoiceDetails", b =>
@@ -885,9 +1047,52 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Navigation("returnedInvoice");
                 });
 
+            modelBuilder.Entity("PharmacyService.Models.Domain.Shift", b =>
+                {
+                    b.HasOne("PharmacyService.Models.Domain.Pranche", "pranche")
+                        .WithMany("shifts")
+                        .HasForeignKey("prancheId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PharmacyService.Models.Domain.User", "user")
+                        .WithMany("shifts")
+                        .HasForeignKey("userId");
+
+                    b.Navigation("pranche");
+
+                    b.Navigation("user");
+                });
+
+            modelBuilder.Entity("PharmacyService.Models.Domain.Supplier", b =>
+                {
+                    b.HasOne("PharmacyService.Models.Domain.Company", "company")
+                        .WithMany("suppliers")
+                        .HasForeignKey("companyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("company");
+                });
+
+            modelBuilder.Entity("PharmacyService.Models.Domain.User", b =>
+                {
+                    b.HasOne("PharmacyService.Models.Domain.Company", "company")
+                        .WithMany("users")
+                        .HasForeignKey("companyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("company");
+                });
+
             modelBuilder.Entity("PharmacyService.Models.Domain.Company", b =>
                 {
                     b.Navigation("pranches");
+
+                    b.Navigation("suppliers");
+
+                    b.Navigation("users");
                 });
 
             modelBuilder.Entity("PharmacyService.Models.Domain.Invoice", b =>
@@ -895,14 +1100,38 @@ namespace PharmacyService.DataAccess.Migrations
                     b.Navigation("MyProperty");
                 });
 
+            modelBuilder.Entity("PharmacyService.Models.Domain.Pranche", b =>
+                {
+                    b.Navigation("customers");
+
+                    b.Navigation("invoices");
+
+                    b.Navigation("productsInPranche");
+
+                    b.Navigation("productToSells");
+
+                    b.Navigation("purchaceInvoices");
+
+                    b.Navigation("returnedInvoices");
+
+                    b.Navigation("shifts");
+                });
+
             modelBuilder.Entity("PharmacyService.Models.Domain.Product", b =>
                 {
+                    b.Navigation("productsInPranche");
+
                     b.Navigation("productsToSell");
+                });
+
+            modelBuilder.Entity("PharmacyService.Models.Domain.ProductsCompany", b =>
+                {
+                    b.Navigation("products");
                 });
 
             modelBuilder.Entity("PharmacyService.Models.Domain.PurchaceInvoice", b =>
                 {
-                    b.Navigation("MyProperty");
+                    b.Navigation("purchaceInvoiceDetails");
                 });
 
             modelBuilder.Entity("PharmacyService.Models.Domain.PurchaceInvoiceDetails", b =>
@@ -913,6 +1142,17 @@ namespace PharmacyService.DataAccess.Migrations
             modelBuilder.Entity("PharmacyService.Models.Domain.ReturnedInvoice", b =>
                 {
                     b.Navigation("returnedInvoicesDetails");
+                });
+
+            modelBuilder.Entity("PharmacyService.Models.Domain.User", b =>
+                {
+                    b.Navigation("invoices");
+
+                    b.Navigation("purchaceInvoices");
+
+                    b.Navigation("returnedInvoices");
+
+                    b.Navigation("shifts");
                 });
 #pragma warning restore 612, 618
         }

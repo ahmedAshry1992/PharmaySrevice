@@ -23,7 +23,7 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.ProductsManagem
             var pro= await context.Products.FindAsync(product.id);
             pro.alive = product.alive;
             pro.classificationId = product.classificationId;
-            pro.companyId = product.companyId;
+            pro.productsCompanyId = product.productsCompanyId;
             pro.dosageFormsID = product.dosageFormsID;
             pro.englishName = product.englishName;
             pro.internationalCode = product.internationalCode;

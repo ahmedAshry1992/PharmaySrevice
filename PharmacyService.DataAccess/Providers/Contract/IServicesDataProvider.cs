@@ -12,7 +12,9 @@ namespace PharmacyService.DataAccess.Providers.Contract
         public ISupplierReopsitory Supplier { get; }
         public IUserRepository User { get;  }
         public ICustomerRepository Customer { get; }
-        
+        public ICompanyRepository Company { get; }
+        public IPrancheRepository Pranche { get; }
+
         Task Save();
     }
 }

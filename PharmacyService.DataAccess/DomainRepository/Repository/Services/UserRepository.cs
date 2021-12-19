@@ -84,6 +84,8 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Services
         public async Task Update(User request)
         {
             var row = await context.Users.FindAsync(request.id);
+            row.prancheId = request.prancheId;
+            row.role = request.role;
             row.firstName = request.firstName;
             row.lastName = request.lastName;
             row.hireDate = request.hireDate;

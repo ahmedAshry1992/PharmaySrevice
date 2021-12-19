@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace PharmacyService.Models.Domain
@@ -18,8 +19,12 @@ namespace PharmacyService.Models.Domain
         public int smallUnitTypeID { set; get; }
         public byte largeUnits { set; get; }
         public byte smallUnits { set; get; }
-        public int companyId { set; get; }
-        public float price { set; get; }
+        public int? productsCompanyId { set; get; }
+        [ForeignKey(nameof(productsCompanyId))]
+        public ProductsCompany productsCompany { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        public decimal price { set; get; }
         public List<ProductToSell> productsToSell { get; set; }
+        public List<ProductInPranche> productsInPranche { get; set; }
     }
 }

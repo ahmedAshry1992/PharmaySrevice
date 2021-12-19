@@ -43,7 +43,7 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
 
         public async Task<int> AddGetId(Invoice invoice)
         {
-            invoice.createdBy = invoice.userId;
+            invoice.createdBy = (int)invoice.userId;
             await context.Invoices.AddAsync(invoice);
             context.SaveChanges();
             return invoice.id;
@@ -52,7 +52,7 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
         public async Task update(Invoice invoice)
         {
             var result= await context.Invoices.FindAsync(invoice.id);
-            result.modifiedBy = invoice.userId;
+            result.modifiedBy =(int) invoice.userId;
             result.typeId = invoice.typeId;
             result.statusId = invoice.statusId;
             result.customerId = invoice.customerId;

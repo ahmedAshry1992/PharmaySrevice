@@ -13,10 +13,11 @@ namespace PharmacyService.DataAccess.DomainRepository.IRepository
         Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null, int recordCount = 0);
         Task<T> GetFirstOrDefault(Expression<Func<T,bool>> filter=null, string includeProperties = null);
         Task Add(T entity);
-        void AddMany(List<T> entity);
+        Task AddMany(List<T> entities);
         void Remove(int id);
 
         void Remove(T entity);
         IQueryable<T> where(Expression<Func<T, bool>> expression);
+        Task<bool> IsValidId(Expression<Func<T, bool>> expression);
     }
 }

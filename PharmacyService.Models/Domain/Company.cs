@@ -23,6 +23,8 @@ namespace PharmacyService.Models.Domain
 
         public bool isDeleted { get; set; }
         public List<Pranche> pranches { get; set; }
+        public List<User> users { get; set; }
+        public List<Supplier> suppliers { get; set; }
 
         public Company()
         {

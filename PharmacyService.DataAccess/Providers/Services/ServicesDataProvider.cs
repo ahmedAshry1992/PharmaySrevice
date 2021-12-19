@@ -20,6 +20,8 @@ namespace PharmacyService.DataAccess.Providers.Services
             Supplier = new SupplierRepository (_db);
             User = new UserRepository(_db);
             Customer = new CustomerRepository(_db);
+            Company = new CompanyRepository(_db);
+            Pranche = new PrancheRepository(_db);
            
         }
         public IShiftRepository Shift { get; private set; }
@@ -29,8 +31,9 @@ namespace PharmacyService.DataAccess.Providers.Services
         public IUserRepository User { get; private set; }
         public ICustomerRepository Customer { get; private set; }
 
-       
+        public ICompanyRepository Company { get; private set; }
 
+        public IPrancheRepository Pranche { get; private set; }
         public void Dispose()
         {
             _db.Dispose();

@@ -24,7 +24,8 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
             var messages = new List<string>();
             foreach (var item in request.purchaces)
             {
-                var product = await context.Products.FindAsync(item.productId);
+                var productInPranche = await context.productsInPranche.FindAsync(item.productInPranchetId);
+                var product = await context.Products.FindAsync(productInPranche.productId);
                 if (product != null)
                 {
                     if (!product.alive)

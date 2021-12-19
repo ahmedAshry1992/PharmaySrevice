@@ -22,8 +22,7 @@ namespace PharmacyService.DataAccess.Providers.Services
             PurchaceInvoice = new PurchaceInvoiceRepository(_db);
             ReturnedInvoiceDetails = new ReturnedInvoiceDetailsRepository(_db);
             ReturnedInvoice = new ReturnedInvoiceRepository(_db);
-            InvoiceType = new InvoiceTypeRepository(_db);
-            InvoiceStatus = new InvoiceStatusRepository(_db);
+           
 
         }
         public IInvoiceDetailsRepository InvoiceDetails { get; private set; }
@@ -37,8 +36,7 @@ namespace PharmacyService.DataAccess.Providers.Services
         public IReturnedInvoiceDetailsRepository ReturnedInvoiceDetails { get; private set; }
 
         public IReturnedInvoiceRepository ReturnedInvoice { get; private set; }
-        public IInvoiceTypeRepository InvoiceType { get; private set; }
-        public IInvoiceStatusRepository InvoiceStatus { get; private set; }
+        
 
         public void Dispose()
         {

@@ -14,8 +14,7 @@ namespace PharmacyService.DataAccess.Providers.Contract
         public IPurchaceInvoiceRepository PurchaceInvoice { get; }
         public IReturnedInvoiceDetailsRepository ReturnedInvoiceDetails { get; }
         public IReturnedInvoiceRepository ReturnedInvoice { get; }
-        public IInvoiceTypeRepository InvoiceType { get; }
-        public IInvoiceStatusRepository InvoiceStatus { get; }
+        
         Task Save();
     }
 }

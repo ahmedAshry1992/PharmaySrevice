@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using PharmacyService.Models.API.Request.Invoice;
 using PharmacyService.Models.API.Request.Management;
+using PharmacyService.Models.API.Request.SalesManagement;
 using PharmacyService.Models.API.Request.Services;
 using PharmacyService.Models.API.Response.Invoice;
 using PharmacyService.Models.API.Response.Management;
@@ -47,10 +48,11 @@ namespace WebApplication1.ServiceConfig.Mapper
             CreateMap<ReturnedInvoiceDetails, ReturnedInvoiceDetailsResponse>();
             CreateMap<User, UserResponse>();
             CreateMap<ProductsCompany,ProductsCompanyRequest>();
-            CreateMap<ProductsCompanyRequest,ProductsCompany >();
-            CreateMap<InvoiceType, InvoiceTypesResponse>();
-            CreateMap<InvoiceStatus, InvoiceStatusResponse>();
+            CreateMap<ProductsCompanyRequest,ProductsCompany >();            
             CreateMap<ProductToSell, ProductToSellResponse>();
+            CreateMap<CompanyRequest, Company>();
+            CreateMap<PrancheRequest, Pranche>();
+            CreateMap<ProductListToPrancheRerquest, ProductInPranche>();
 
         }
     }

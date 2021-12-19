@@ -222,6 +222,75 @@ namespace WebApplication1.Controllers.Management
 
         #endregion
 
+        #region Company
+        [HttpPost]
+        [Route("management/company/create")]
+        public async Task<ResponseBuilder> CompanyCreate(CompanyCreateRequest request)
+        {
+            try
+            {
+                var validationList = new List<string>();
+                if (!_servicesDataProvider.User.IsValidEmail(request.user.email) && request.user.email != null)
+                    validationList.Add("Invalid user email");
+                validationList.AddRange(_servicesDataProvider.User.ValidatePassword(request.user.password));
+                if (request.user.firstName == null)
+                    validationList.Add("First name is required");
+                if (request.user.lastName == null)
+                    validationList.Add("Last name is required");
+                if (request.user.phoneNumber == null)
+                    validationList.Add("Phone number is required");
+                validationList.AddRange(await _servicesDataProvider.User.ValidUserId(request.user.createdBy));
+                if (validationList.Count == 0)
+                {
+                    var company = _mapper.Map<Company>(request.company);                    
+                    await _servicesDataProvider.Company.Add(company);
+                    var pranche = _mapper.Map<Pranche>(request.pranche);                    
+                    await _servicesDataProvider.Pranche.Add(pranche);
+                    request.user.password = _encryption.Encrypt(request.user.password);
+                    var user = _mapper.Map<User>(request.user);
+                    await _servicesDataProvider.User.Add(user);
+                    return ResponseBuilder.Create(HttpStatusCode.OK, new { status = true });
+                }
+                return ResponseBuilder.Create(HttpStatusCode.InternalServerError, new { status = false }, validationList);
+            }
+            catch (Exception ex)
+            {
+
+                return ResponseBuilder.Create(HttpStatusCode.InternalServerError, new { status = false }, new string[] { ex.Message });
+            }
+
+        }
+        #endregion
+
+
+        #region Pranche
+
+        [HttpPost]
+        [Route("management/pranche/create")]
+        public async Task<ResponseBuilder> PrancheCreate(PrancheRequest request)
+        {
+            try
+            {
+                var validationList = new List<string>();
+                validationList.AddRange(await _servicesDataProvider.Company.ValidCompanyId(request.companyId));
+                if (validationList.Count==0)
+                {
+                    var pranche = _mapper.Map<Pranche>(request);
+                    await _servicesDataProvider.Pranche.Add(pranche);
+                    return ResponseBuilder.Create(HttpStatusCode.OK, new { status = true });
+                }
+                return ResponseBuilder.Create(HttpStatusCode.InternalServerError, new { status = false }, validationList);
+            }
+            catch (Exception ex)
+            {
+                return ResponseBuilder.Create(HttpStatusCode.InternalServerError, new { status = false }, new string[] { ex.Message });
+            }
+        }
+
+        #endregion
+
+
+
         #region User
 
         [HttpPost]
@@ -355,6 +424,9 @@ namespace WebApplication1.Controllers.Management
                             logInResponse.email = response.email;
                             logInResponse.id = response.id;
                             logInResponse.firstName = response.firstName;
+                            logInResponse.role = response.role;
+                            logInResponse.companyId = response.companyId;
+                            logInResponse.prancheId = response.prancheId;
                             return ResponseBuilder.Create(HttpStatusCode.OK, logInResponse);
                         }
                         return ResponseBuilder.Create(HttpStatusCode.InternalServerError, new { status = false }, new string[] { "Wrong password"});

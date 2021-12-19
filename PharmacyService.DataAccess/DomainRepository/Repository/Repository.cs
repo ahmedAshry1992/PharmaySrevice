@@ -26,7 +26,7 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository
             _context.SaveChanges();
         }
 
-        public async void AddMany(List<T> entities)
+        public async Task AddMany(List<T> entities)
         {
             await _dbSet.AddRangeAsync(entities);
             _context.SaveChanges();
@@ -106,6 +106,10 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository
             return _dbSet.Where<T>(expression);
         }
 
+        public Task<bool> IsValidId(Expression<Func<T, bool>> expression)
+        {
+            return _dbSet.AnyAsync(expression);
+        }
        
     }
 }

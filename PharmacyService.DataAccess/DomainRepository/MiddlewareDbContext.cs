@@ -27,10 +27,9 @@ namespace PharmacyService.DataAccess.DomainRepository
         public DbSet<SmallUnitType> SmallUnitTypes { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<ProductsCompany> ProductsCompanies { get; set; }
-        public DbSet<InvoiceStatus> invoiceStatuses { get; set; }
-        public DbSet<InvoiceType> invoiceTypes { get; set; }
+        public DbSet<ProductsCompany> ProductsCompanies { get; set; }        
         public DbSet<Company> Companies { get; set; }
         public DbSet<Pranche> Pranches { get; set; }
+        public DbSet<ProductInPranche> productsInPranche { get; set; }
     }
 }

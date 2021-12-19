@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PharmacyService.Models.Domain;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,6 +8,9 @@ namespace PharmacyService.Models.API.Response.Management
     public class LogInUserResponse
     {
         public int id { get; set; }
+        public UsreType role { get; set; }
+        public int prancheId { get; set; }
+        public int companyId { get; set; }
         public string email { get; set; }
         public string firstName { set; get; }
     }

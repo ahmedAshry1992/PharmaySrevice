@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PharmacyService.Models.Domain;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -7,6 +8,8 @@ namespace PharmacyService.Models.API.Request.Management
     public class UpdateUserRequest
     {
         public int id { get; set; }
+        public UsreType role { get; set; }
+        public int prancheId { get; set; }
         public string firstName { set; get; }
         public string lastName { set; get; }
         public DateTime hireDate { set; get; }

@@ -8,12 +8,14 @@ namespace PharmacyService.Models.API.Request.Invoice
     {
         public int id { get; set; }
         public int supplierId { get; set; }
-        public int createdBy { get; set; }
+        public int userId { get; set; }
+        public int prancheId { get; set; }
+        public int companyId { get; set; }
         public List<PurchaceaianvoiceModel> purchaces { get; set; }
     }
     public class PurchaceaianvoiceModel
     {
-        public int productId { get; set; }
+        public int productInPranchetId { get; set; }
         public int quantity { get; set; }
         public int bonus { get; set; }
         public DateTime expireDate { get; set; }

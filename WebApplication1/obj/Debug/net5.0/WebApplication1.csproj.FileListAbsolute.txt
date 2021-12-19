@@ -192,7 +192,6 @@ D:\work\PharmacyPro\PharmacyService\WebApplication1\bin\Debug\net5.0\PharmacySer
 D:\work\PharmacyPro\PharmacyService\WebApplication1\bin\Debug\net5.0\PharmacyService.DataAccess.pdb
 D:\work\PharmacyPro\PharmacyService\WebApplication1\bin\Debug\net5.0\PharmacyService.Infrastructure.pdb
 D:\work\PharmacyPro\PharmacyService\WebApplication1\bin\Debug\net5.0\PharmacyService.Models.pdb
-D:\work\PharmacyPro\PharmacyService\WebApplication1\obj\Debug\net5.0\WebApplication1.csprojAssemblyReference.cache
 D:\work\PharmacyPro\PharmacyService\WebApplication1\obj\Debug\net5.0\WebApplication1.GeneratedMSBuildEditorConfig.editorconfig
 D:\work\PharmacyPro\PharmacyService\WebApplication1\obj\Debug\net5.0\WebApplication1.AssemblyInfoInputs.cache
 D:\work\PharmacyPro\PharmacyService\WebApplication1\obj\Debug\net5.0\WebApplication1.AssemblyInfo.cs
@@ -208,3 +207,4 @@ D:\work\PharmacyPro\PharmacyService\WebApplication1\obj\Debug\net5.0\WebApplicat
 D:\work\PharmacyPro\PharmacyService\WebApplication1\obj\Debug\net5.0\ref\WebApplication1.dll
 D:\work\PharmacyPro\PharmacyService\WebApplication1\obj\Debug\net5.0\WebApplication1.pdb
 D:\work\PharmacyPro\PharmacyService\WebApplication1\obj\Debug\net5.0\WebApplication1.genruntimeconfig.cache
+D:\work\PharmacyPro\PharmacyService\WebApplication1\obj\Debug\net5.0\WebApplication1.csproj.AssemblyReference.cache

@@ -38,12 +38,24 @@ namespace WebApplication1.Controllers.Invoices
             try
             {
                 var validations = await _invoicesDataProvider.PurchaceInvoice.ValidatePurchaseInvoiceRequest(request);
-                validations.AddRange(await _servicesDataProvider.User.ValidUserId(request.createdBy));
+                validations.AddRange(await _servicesDataProvider.User.ValidUserId(request.userId));
+                if (await _servicesDataProvider.Company.IsValidId(x=>x.companyId==request.companyId))
+                {
+                    validations.Add("Invalid company");
+                }
+                if (await _servicesDataProvider.Pranche.IsValidId(x => x.pranchId == request.prancheId))
+                {
+                    validations.Add("Invalid pranche");
+                }
+                if (await _servicesDataProvider.Supplier.IsValidId(x => x.id == request.supplierId))
+                {
+                    validations.Add("Invalid supplier");
+                }
                 if (validations.Count == 0)
                 {
                     var id = await _invoicesDataProvider.PurchaceInvoice.AddGetId(_mapper.Map<PurchaceInvoice>(request));
-                    var ids= await _invoicesDataProvider.PurchaceInvoiceDetails.AddManyItems(id, request.createdBy, _mapper.Map<List<PurchaceInvoiceDetails>>(request.purchaces));
-                    var respose = await _productManagementDataProvider.ProductToSell.AddProductsFromPurInv(ids, request.createdBy);
+                    var ids= await _invoicesDataProvider.PurchaceInvoiceDetails.AddManyItems(id, request.userId, _mapper.Map<List<PurchaceInvoiceDetails>>(request.purchaces));
+                    var respose = await _productManagementDataProvider.ProductToSell.AddProductsFromPurInv(ids, request.userId);
 
                     return ResponseBuilder.Create(HttpStatusCode.OK,_mapper.Map<List<ProductToSellResponse>>(respose));
                 }
@@ -254,7 +266,7 @@ namespace WebApplication1.Controllers.Invoices
                     var result = _mapper.Map<List<SalesInvoiceDetailsResponse>>(response);
                     foreach (var item in result)
                     {
-                        item.productId = (await _productManagementDataProvider.ProductToSell.Get(item.productToSellId)).productId;
+                        item.productId = (int)(await _productManagementDataProvider.ProductToSell.Get(item.productToSellId)).productInPranchetId;
                     }
                     return ResponseBuilder.Create(HttpStatusCode.OK, result);
                 }
@@ -347,7 +359,7 @@ namespace WebApplication1.Controllers.Invoices
                     foreach (var item in result)
                     {
                         item.productToSellId = (await _invoicesDataProvider.InvoiceDetails.Get(item.invoiceDetailsId)).productToSellId;
-                        item.productId = (await _productManagementDataProvider.ProductToSell.Get(item.productToSellId)).productId;
+                        item.productId = (int)(await _productManagementDataProvider.ProductToSell.Get(item.productToSellId)).productInPranchetId;
                     }
                     return ResponseBuilder.Create(HttpStatusCode.OK,result );
                 }
@@ -362,47 +374,6 @@ namespace WebApplication1.Controllers.Invoices
 
         #endregion
 
-        #region InvoiceType&Status
-        [HttpGet]
-        [Route("invoicetypes/sales/getall")]
-        public async Task<ResponseBuilder> GetAllSalesInvoiceTypes()
-        {
-            try
-            {
-                var invoices = await _invoicesDataProvider.InvoiceType.GetAll(filter: x => !x.isDeleted);
-                if (invoices != null && invoices.Count() != 0)
-                {
-                    return ResponseBuilder.Create(HttpStatusCode.OK, _mapper.Map<List<InvoiceTypesResponse>>(invoices));
-                }
-                return ResponseBuilder.Create(HttpStatusCode.NotFound, new { status = false }, new string[] { "There are no records" });
-            }
-            catch (Exception ex)
-            {
-
-                return ResponseBuilder.Create(HttpStatusCode.InternalServerError, new { status = false }, new string[] { ex.Message });
-            }
-        }
-
-        [HttpGet]
-        [Route("invoicestatus/sales/getall")]
-        public async Task<ResponseBuilder> GetAllSalesInvoiceStatus()
-        {
-            try
-            {
-                var invoices = await _invoicesDataProvider.InvoiceStatus.GetAll(filter: x => !x.isDeleted);
-                if (invoices != null && invoices.Count() != 0)
-                {
-                    return ResponseBuilder.Create(HttpStatusCode.OK, _mapper.Map<List<InvoiceStatusResponse>>(invoices));
-                }
-                return ResponseBuilder.Create(HttpStatusCode.NotFound, new { status = false }, new string[] { "There are no records" });
-            }
-            catch (Exception ex)
-            {
-
-                return ResponseBuilder.Create(HttpStatusCode.InternalServerError, new { status = false }, new string[] { ex.Message });
-            }
-        }
-
-        #endregion
+        
     }
 }

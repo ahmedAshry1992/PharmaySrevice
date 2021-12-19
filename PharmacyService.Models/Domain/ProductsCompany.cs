@@ -8,6 +8,7 @@ namespace PharmacyService.Models.Domain
     {
         public string companyName { get; set; }
         public string about { get; set; }
+        public List<Product> products { get; set; }
     }
     
 }

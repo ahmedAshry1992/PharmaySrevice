@@ -139,17 +139,18 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
             ProductToSell product = new ProductToSell();
             InvoiceCreateResponse invoiceCreateResponse = new InvoiceCreateResponse();
             List<InvoiceSales> invoiceSales = new List<InvoiceSales>();
-            float total = 0;
-            float productPrice = 0;
+            decimal total = 0;
+            decimal productPrice = 0;
             foreach (var item in sales)
             {
                 product = await context.ProductsToSell.FindAsync(item.productToSellId);
                 if (product.exist && product.items >= item.items)
                 {
-                    var pItems = context.Products.Find(product.productId);
+                    var pItems = context.Products.Find(product.productInPranche.productId);
+
                     if (item.discount > 0)
                     {
-                        productPrice = pItems.price - (pItems.price * item.discount);
+                        productPrice = pItems.price - (pItems.price * (decimal)item.discount);
                     }
                     else productPrice = pItems.price;
                     invoiceSales.Add(new InvoiceSales
@@ -157,10 +158,10 @@ namespace PharmacyService.DataAccess.DomainRepository.Repository.Invoices
                         productName = pItems.englishName,
                         smallUnits = item.items == pItems.largeUnits ? 0 : item.items,
                         largeUnits = item.items == pItems.largeUnits ? 1 : 0,
-                        price = productPrice * ((float)item.items / pItems.largeUnits),
+                        price = productPrice * (item.items / pItems.largeUnits),
                         discount = item.discount
                     });
-                    total = total + ((float)productPrice * ((float)item.items / pItems.largeUnits));
+                    total = total + (productPrice * (item.items / pItems.largeUnits));
                     product.items -= item.items;
                     product.modifiedBy = userId;
                     product.modifiedAt = DateTime.Now;
